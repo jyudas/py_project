@@ -16,7 +16,7 @@ password - 서버 암호 입력
 db - 데이터베이스, 스키마 이름 입력
 charset - 문자세트 입력. 한글 사용을 위해 ‘utf8’ 입력
 """
-conn = pymysql.connect(host='jyudas.synology.me', user='test', password='Seoyh3107!', db='test', charset='utf8')
+conn = pymysql.connect(host='jyudas.synology.me', user='test', password='########', db='test', charset='utf8')
 cur = conn.cursor()
 sql = "insert into test_1 (yyyy, mm, dd, number_1, number_2, number_3, number_4, number_5, number_6, number_7) values (%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s)"
 
