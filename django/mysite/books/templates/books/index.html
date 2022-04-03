@@ -1,0 +1,92 @@
+<style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+
+</style>
+
+<!--추가처리-->
+<script type="text/javascript">
+
+    function check()
+    {
+        if (document.getElementById("id").value == "")
+        {
+            alert("삭제할 ID를 입력 하세요.");
+            return;
+        }
+
+        if (document.getElementById("pw").value == "")
+        {
+            alert("비밀번호를 입력 하세요.");
+            return;
+        }
+
+        document.getElementById('frm_del').submit()
+    }
+
+    function goBack(){
+        document.getElementById('frm_init').submit()
+    }
+</script>
+
+
+
+<form action="{% url 'books:add' %}" method="post">
+ {% csrf_token %}
+    <table border="'1'">
+       <tr>
+            <td>추가</td><td>구분</td><td>제목</td><td> 저자 </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="추가"></td>
+            <td><input type="text" id="category" name="category" size="50"></td>
+            <td><input type="text" id="title" name="title" size="50"></td>
+            <td><input type="text" id="writer" name="writer" size="50" ></td>
+        </tr>
+    </table>
+ </form>
+<!--삭제처리-->
+ <form action="{% url 'books:delBook' %}" method="post" id="frm_del" name="frm_del">
+ {% csrf_token %}
+    <table border="'1'">
+        <tr>
+                <td width="50">삭제</td>
+                <td>삭제할 ID 와 비밀번호를 입력 해주세요 </td>
+            </tr>
+        <tr>
+                <td width="50"><input type="button" value="삭제" id="btn" onclick="check()"> </td>
+                <td><input type="text" id="id" name="id" size="10">
+                    &nbsp; /&nbsp;
+                <input type="password" id="pw" name="pw" size="10">
+                </td>
+            </tr>
+    </table>
+ </form>
+<!--에러처리-->
+{% if error_message %}
+<form action="{% url 'books:index' %}" method="post" id="frm_init" name="frm_del">
+     {% csrf_token %}
+<p><strong>{{ error_message }}</strong></p>
+<a href='#' onclick="goBack()"> 뒤로가기 </a>
+</form>
+{% endif %}
+
+<!--리스트처리-->
+    <table border="'1'">
+        <tr>
+            <td>ID</td><td>구분</td><td>제목</td><td> 저자 </td>
+        </tr>
+
+    {% for book in all_book_lists %}
+         <tr>
+            <td>{{ book.id }}</td><td>{{ book.category }}</td><td>{{ book.title }}</td><td> {{ book.writer }} </td>
+        </tr>
+    {% endfor %}
+    </table>
