@@ -10,7 +10,7 @@ db - 데이터베이스, 스키마 이름 입력
 charset - 문자세트 입력. 한글 사용을 위해 ‘utf8’ 입력
 """
 
-conn = pymysql.connect(host='jyudas.synology.me', user='test', password='Seoyh3107!', db='test', charset='utf8')
+conn = pymysql.connect(host='jyudas.synology.me', user='test', password='########!', db='test', charset='utf8')
 cur = conn.cursor()
 
 cur.execute("select * from test_1")
